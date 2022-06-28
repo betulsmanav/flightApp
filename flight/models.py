@@ -27,6 +27,6 @@ class Passenger(models.Model):
     
 
 class Reservation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='reservations_u')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='reservations')
     passenger = models.ManyToManyField(Passenger, related_name='reservations')
-    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name='reservation')
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name='reservations')
