@@ -16,11 +16,8 @@ class RegisterView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         data = serializer.data
-        if Token.objects.filter(user=user).exists():
-            token = Token.objects.get(user=user)
-            data["token"] = token.key
-        else:
-            data["token"] = "No token created for this user.... :))"
+        token = Token.objects.get(user=user)
+        data["token"] = token.key
         headers = self.get_success_headers(serializer.data)
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 

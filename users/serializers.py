@@ -4,6 +4,7 @@ from rest_framework import serializers,validators
 from dj_rest_auth.serializers import TokenSerializer
 
 class RegisterSerializers(serializers.ModelSerializer):
+    # email unique ve required olmasi icin override ettik
     email=serializers.EmailField(
         required=True,
         validators=[validators.UniqueValidator(queryset=User.objects.all())]
@@ -15,7 +16,7 @@ class RegisterSerializers(serializers.ModelSerializer):
         style={'input_type':'password'}
     )
     password2=serializers.CharField(
-        write_only=True,
+        write_only=True, # GET isteginde gorunmesin diye
         required=True,
         validators=[validate_password],
         style={'input_type':'password'}
